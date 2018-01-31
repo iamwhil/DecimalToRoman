@@ -67,7 +67,7 @@ def convert_numerals(num, base, fives, tens)
 	end
 end
 
-# Begin code execution.
+# Begin program execution.
 
 # Get input from user.
 print "Please enter a number between 1 and 3000: "
@@ -80,6 +80,6 @@ response = check_number(number)
 if response != true
 	puts response
 else
-	puts convert(number.to_i)
+	puts "#{number.chomp} converted to roman numerals is: #{convert(number.to_i)}"
 end
 

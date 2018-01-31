@@ -32,9 +32,39 @@ def check_number(number)
 	end
 end
 
-# Convert the decimal number to roman numerals.
-def convert_to_roman_numerals(number)
-	return "7"
+# Convert the decimal number to Roman numerals.
+# Returns the Roman numeral as a string.
+def convert(number)
+	roman_string = ""
+	# Break the number into thousands, hundreds, tens, and ones.
+	thds = number / 1000
+	hnds = number % 1000 / 100
+	tens = number % 100 / 10
+	ones = number % 10
+	roman_string += convert_numerals(thds, "M", "Z", "Z")
+	roman_string += convert_numerals(hnds, "C", "D", "M")
+	roman_string += convert_numerals(tens, "X", "L", "C")
+	roman_string += convert_numerals(ones, "I", "V", "X")
+	roman_string
+end
+
+# Converts a number into roman numerals based on its
+# decimal position and the corresponding Roman
+# representation.
+# Takes in the number, the base value, the "fives"
+# value, and the "tens" value.
+# Eg. for the hundreds digits, the base number is C for 100, the fives
+# value is D for 500, and the "tens" value is M for 1000. 
+def convert_numerals(num, base, fives, tens)
+	if [0,1,2,3].include?(num)
+		return base * num
+	elsif 4 == num
+		return base + fives
+	elsif [5, 6, 7, 8].include?(num)
+		return fives + base * (num - 5)
+	else
+		return base + tens
+	end
 end
 
 # Begin code execution.
@@ -50,6 +80,6 @@ response = check_number(number)
 if response != true
 	puts response
 else
-	puts convert_to_roman_numerals(number)
+	puts convert(number.to_i)
 end
 
